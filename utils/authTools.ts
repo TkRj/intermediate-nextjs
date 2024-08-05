@@ -1,11 +1,12 @@
 import 'server-only'
+import 'dotenv/config'
 import jwt from 'jsonwebtoken'
 import { db } from '@/db/db'
 import { eq } from 'drizzle-orm'
 import { users } from '@/db/schema'
 import bcrypt from 'bcrypt'
 
-const SECRET = 'use_an_ENV_VAR'
+const SECRET = process.env.SECRET!;
 
 export const createTokenForUser = (userId: string) => {
   const token = jwt.sign({ id: userId }, SECRET)
